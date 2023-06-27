@@ -7,7 +7,7 @@ export SUIF_TEMPLATE=${SUIF_TEMPLATE:-"MSR/1015/dce"}
 echo "Cloning SUIF for tag ${SUIF_TAG}..."
 
 git clone -b "${SUIF_TAG}" --single-branch \
-  https://github.com/SoftwareAG/sag-unattended-installations.git \
+  https://github.com/staillansag/sag-unattended-installations.git \
   "${SUIF_HOME}"
 
 # shellcheck source=/dev/null
