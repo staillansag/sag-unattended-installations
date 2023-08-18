@@ -25,7 +25,9 @@ Ensure the files have correct names, otherwise the process won't work.
     - Microservies runtime license file
 
 - build against the build context folder
-```docker build -t yourimagename .```
+```
+docker build -t yourimagename .
+```
 The build process will take several minutes.
 
 
