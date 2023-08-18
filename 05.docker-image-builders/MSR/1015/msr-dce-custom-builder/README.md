@@ -70,7 +70,7 @@ Add or remove your packages there, commit the Dockerfile and push it to Github.
 ### Modify the install.sh file
 
 Since you've forked and changed the Github repository, you need to make the build process point to your forked Github repository.
-In the install.sh file, location this section:
+In the install.sh file, located this section:
 ```
 git clone -b "${SUIF_TAG}" --single-branch \
   https://github.com/staillansag/sag-unattended-installations.git \
