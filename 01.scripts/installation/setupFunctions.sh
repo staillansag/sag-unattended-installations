@@ -421,6 +421,10 @@ setupProductsAndFixes() {
       fi
     fi
   fi
+
+  logI "[setupFunctions.sh:setupProductsAndFixes()] - Applying permissions for OpenShift deployment"
+  chgrp -R 0 "${lInstallDir}" && chmod -R g=u "${lInstallDir}"
+  
   return "${RESULT_setupProductsAndFixes}"
 }
 
