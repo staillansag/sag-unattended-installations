@@ -373,6 +373,7 @@ setupProductsAndFixes() {
       logE "[setupFunctions.sh:setupProductsAndFixes()] - Cannot create the installation directory!"
       RESULT_setupProductsAndFixes=7
     else
+      chmod -R g=u "${lInstallDir}"
       local d
       d=$(date +%y-%m-%dT%H.%M.%S_%3N)
       local installerDebugLevel="${6:-verbose}"
@@ -421,9 +422,6 @@ setupProductsAndFixes() {
       fi
     fi
   fi
-
-  logI "[setupFunctions.sh:setupProductsAndFixes()] - Applying permissions for OpenShift deployment"
-  chgrp -R 0 "${lInstallDir}" && chmod -R g=u "${lInstallDir}"
   
   return "${RESULT_setupProductsAndFixes}"
 }
