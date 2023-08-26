@@ -89,6 +89,7 @@ installProducts() {
     logD "Dumping the install.wmscript file into the session audit folder..."
     if [ "${SUIF_DEBUG_ON}" -ne 0 ]; then
       cp /dev/shm/install.wmscript "${SUIF_AUDIT_SESSION_DIR}/"
+      cat ${SUIF_AUDIT_SESSION_DIR}/debugInstall.log
     fi
     return 4
   fi
