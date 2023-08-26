@@ -100,6 +100,9 @@ COPY --from=installer ${SAG_HOME}/IntegrationServer/packages/WmMonitor/ ${SAG_HO
 
 RUN rm ${SAG_HOME}/IntegrationServer/config/licenseKey.xml; touch ${SAG_HOME}/IntegrationServer/config/licenseKey.xml
 
+RUN chmod -R 770 /opt/softwareag
+
+
 FROM "${__from_img}"
 
 ARG __sag_home=/opt/softwareag
@@ -110,7 +113,7 @@ ENV SAG_HOME=${__sag_home} \
     JRE_HOME=${__sag_home}/jvm/jvm/ \
     JDK_HOME=${__sag_home}/jvm/jvm/
 
-RUN microdnf -y update ;\ 
+RUN microdnf -y update ;\
     microdnf -y install \
         procps \
         shadow-utils \
@@ -118,13 +121,13 @@ RUN microdnf -y update ;\
     microdnf clean all ;\
     rm -rf /var/cache/yum ;\
     groupadd -g ${__user_group_id} sagadmin ;\
-    useradd -u ${__user_group_id} -m -g ${__user_group_id} -d ${__sag_home} sagadmin
+    useradd -u ${__user_group_id} -m -g 0 -d ${__sag_home} sagadmin
 
-COPY --from=packer --chown=${__user_group_id}:${__user_group_id} ${__sag_home} ${__sag_home}
+RUN chmod 770 ${__sag_home}
+COPY --from=packer --chown=${__user_group_id}:0 ${__sag_home} ${__sag_home}
 
 USER sagadmin
 
-#RUN cd /opt/softwareag/IntegrationServer/docker; ./is_container.sh updateDockerConfigFiles -Ddocker.isHomeDir=${SAG_HOME}/IntegrationServer -Ddocker.rootDir=${SAG_HOME};
 EXPOSE 5555
 EXPOSE 9999
 EXPOSE 5553
